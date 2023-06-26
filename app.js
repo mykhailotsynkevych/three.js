@@ -3,7 +3,19 @@ import * as THREE from "./three.module.js";
 
 export default class {
   constructor() {
-    Viewer.init();
+    Viewer.init({
+      renderer: {
+        parent: document.body,
+        //сглаживает и смягчает углы и ребра на стике
+        antialias: true,
+        //прозрачность
+        alpha: true,
+        //цвет фона
+        setClearColor: "blue",
+        //плотность пикселей
+        pixelRatio: 1,
+      },
+    });
     this.createObject();
   }
 
@@ -18,8 +30,8 @@ export default class {
 
     var that = this;
 
-    Viewer.setUpdate("rotate_object", () => {
-      that.object.rotation.y += 0.01;
+    Viewer.addUpdate("rotate_object", () => {
+      that.object.rotation.y += 0.005;
     });
   }
 }
